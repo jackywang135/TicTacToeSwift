@@ -15,6 +15,7 @@
 		858B4DBF19FFEE7100BDDE30 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 858B4DBD19FFEE7100BDDE30 /* LaunchScreen.xib */; };
 		858B4DCB19FFEE7200BDDE30 /* TicTacToeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 858B4DCA19FFEE7200BDDE30 /* TicTacToeTests.swift */; };
 		858B4DD519FFF40A00BDDE30 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 858B4DD419FFF40A00BDDE30 /* QuartzCore.framework */; };
+		85DA55171A03EBAD00E59840 /* BlockView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85DA55161A03EBAD00E59840 /* BlockView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -40,6 +41,7 @@
 		858B4DC919FFEE7200BDDE30 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		858B4DCA19FFEE7200BDDE30 /* TicTacToeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TicTacToeTests.swift; sourceTree = "<group>"; };
 		858B4DD419FFF40A00BDDE30 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		85DA55161A03EBAD00E59840 /* BlockView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BlockView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -85,6 +87,7 @@
 			children = (
 				858B4DB419FFEE7100BDDE30 /* AppDelegate.swift */,
 				858B4DB619FFEE7100BDDE30 /* ViewController.swift */,
+				85DA55161A03EBAD00E59840 /* BlockView.swift */,
 				853E1A271A01A99E00504F5D /* Line.swift */,
 				858B4DB819FFEE7100BDDE30 /* Main.storyboard */,
 				858B4DBB19FFEE7100BDDE30 /* Images.xcassets */,
@@ -219,6 +222,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				85DA55171A03EBAD00E59840 /* BlockView.swift in Sources */,
 				853E1A281A01A99E00504F5D /* Line.swift in Sources */,
 				858B4DB719FFEE7100BDDE30 /* ViewController.swift in Sources */,
 				858B4DB519FFEE7100BDDE30 /* AppDelegate.swift in Sources */,
