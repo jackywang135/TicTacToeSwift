@@ -19,10 +19,7 @@ class BlockView : UIView {
     
     init(mark : Mark) {
         super.init()
-//        self.mark = mark
-//        draw(mark)
     }
-    
     
     required init(coder aDecoder: NSCoder) {
         super.init(coder:aDecoder)
@@ -88,8 +85,6 @@ class BlockView : UIView {
         
     }
     
-    
-    
     func drawO() {
         
         var circleShapeLayer = CAShapeLayer()
@@ -128,13 +123,5 @@ class BlockView : UIView {
         
         
     }
-    
-    
-    
-    
-    
-    
-    
-    
     
 }

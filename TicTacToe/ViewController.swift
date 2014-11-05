@@ -36,6 +36,17 @@ extension Turn {
             return .O
         }
     }
+    
+    func getWinner() -> GameStatus {
+        switch self {
+        case Xturn:
+            return .Xwin
+        case Oturn:
+            return .Owin
+        default:
+            return .inconclusive
+        }
+    }
 }
 
 class ViewController: UIViewController {
@@ -58,8 +69,6 @@ class ViewController: UIViewController {
         }
     }
     
-    let winningBlockCombination = [[0,1,2],[3,4,5],[6,7,8],[0,3,6],[1,4,7],[2,5,8],[0,4,8],[2,4,6]]
-    
     func setUpLines() -> [Line] {
         let screenHeight = CGFloat(UIScreen.mainScreen().bounds.height)
         let screenWidth = CGFloat(UIScreen.mainScreen().bounds.width)
@@ -71,6 +80,8 @@ class ViewController: UIViewController {
         
         return [lineHorizonatalTop, lineHorizontalBottom, lineVerticalLeft, lineVerticalRight]
     }
+    
+    let winningBlockCombination = [[0,1,2],[3,4,5],[6,7,8],[0,3,6],[1,4,7],[2,5,8],[0,4,8],[2,4,6]]
     
     @IBOutlet var blockViewCollection: Array <BlockView>!
 
@@ -92,22 +103,80 @@ class ViewController: UIViewController {
         if let blockView = blockView as? BlockView {
             if blockView.mark == .Empty {
                 blockView.draw(turn.getMark())
+                gameStatus = checkGameStatus()
                 turn = turn.switchTurn()
+                NSLog("\(gameStatus)")
+                
+                
             }
         }
     }
     
-    func createWinningCombo() {
-        for blockview in blockViewCollection {
-            
+    func checkGameStatus() -> GameStatus {
+        
+        //Check for a win
+        if checkIfWin() {
+            return turn.getWinner()
+            }
+        //check for tie
+        if checkIfTie() {
+            return .tie
         }
+        return .inconclusive
     }
     
-    func checkWin() {
-        for blockview in blockViewCollection {
-
+    func checkIfWin() -> Bool {
+        for array in winningBlockCombination {
+            if blockViewCollection[array[0]].mark == blockViewCollection[array[1]].mark && blockViewCollection[array[1]].mark == blockViewCollection[array[2]].mark && blockViewCollection[array[0]].mark != .Empty {
+                return true
+            }
         }
+        return false
     }
+    
+    func checkIfTie() -> Bool {
+        
+        var remainingBlocks = [BlockView]()
+        var unCheckedBlocks = [BlockView]()
+        
+        for blockView in blockViewCollection {
+            if blockView.mark == .Empty {
+                remainingBlocks.append(blockView)
+                unCheckedBlocks.append(blockView)
+            }
+        }
+        
+        for (index1, blockView) in enumerate(unCheckedBlocks) {
+            
+            for (index2, blockView) in enumerate(remainingBlocks) {
+                blockView.mark = turn.getMark()
+                if checkIfWin() {
+                    return false
+                }
+                turn.switchTurn()
+                remainingBlocks.removeAtIndex(index2)
+            }
+            unCheckedBlocks.removeAtIndex(index1)
+            
+            
+            //blockView removed from remainingBlock
+            //mark next blockView in remainingBlock
+            //checkifwin 
+            //no?
+            //mark next blockView in remianingBlock
+            //after exhausted
+            unCheckedBlocks.removeLast()
+            
+        }
+        
+        
+        
+        
+        
+        
+        return true
+    }
+    
     
     func drawLinesAnimation(lineCount:Int) {
         
