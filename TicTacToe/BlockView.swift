@@ -11,8 +11,16 @@ import UIKit
 import CoreGraphics
 
 
+
+
 enum Mark {
     case X, O, Empty
+}
+
+protocol BlockViewDelegate {
+    
+    func didFinishDrawMarkAnimation()
+
 }
 
 class BlockView : UIView {
@@ -20,6 +28,8 @@ class BlockView : UIView {
     init(mark : Mark) {
         super.init()
     }
+    
+    var blockViewDelegate : BlockViewDelegate!
     
     required init(coder aDecoder: NSCoder) {
         super.init(coder:aDecoder)
@@ -29,7 +39,7 @@ class BlockView : UIView {
     let animationDuration = 0.5
     let lineWidth : CGFloat = 7
     
-    func draw (mark : Mark) {
+    func drawMark (mark : Mark) {
         if mark == .X {
             self.mark = .X
             drawX()
@@ -79,8 +89,15 @@ class BlockView : UIView {
         
         crossShapeLayer.addSublayer(pencilLayer)
         self.layer.addSublayer(crossShapeLayer)
+        
+        CATransaction.begin()
+        CATransaction.setCompletionBlock {
+            self.blockViewDelegate.didFinishDrawMarkAnimation()
+        }
         crossShapeLayer.addAnimation(crossAnimation, forKey: "drawCrossAnimation")
         pencilLayer.addAnimation(penAnimation, forKey: "drawPenAnimation")
+        
+        CATransaction.commit()
         
         
     }
@@ -118,8 +135,15 @@ class BlockView : UIView {
         self.layer.addSublayer(circleShapeLayer)
         circleShapeLayer.addSublayer(pencilLayer)
         
+        CATransaction.begin()
+        CATransaction.setCompletionBlock {
+            self.blockViewDelegate.didFinishDrawMarkAnimation()
+        }
+        
         circleShapeLayer.addAnimation(circleAnimation, forKey: "drawCircleAnimation")
         pencilLayer.addAnimation(penAnimation, forKey: "drawPenAnimation")
+        
+        CATransaction.commit()
         
         
     }
